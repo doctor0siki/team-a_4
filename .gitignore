@@ -8,3 +8,6 @@
 .remote-sync.json
 .idea/dictionaries/y_fukumoto.xml
 .idea/
+app/View/test/index.twig
+app/Controller/test/index.php
+app/Model/Dao/Test/
