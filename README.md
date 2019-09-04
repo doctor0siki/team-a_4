@@ -1,4 +1,5 @@
 # Web Service Using Slim Framework 3 Skeleton Application
+# this is a-team project
 
 This is a sample web application using Slim3 for 2021 graduates intern event for CERES INC.
 
@@ -9,7 +10,7 @@ This is a sample web application using Slim3 for 2021 graduates intern event for
 - doctorine/dbal
 - bryanjhv/slim-session
 - Bootstrap4
- 
+
 # MVC Root
 
 - Model (DAO)
@@ -20,7 +21,7 @@ This is a sample web application using Slim3 for 2021 graduates intern event for
 
 - Controller (Routes)
    - app/Controller
-   
+
 # To Start Builtin Web server
 
 type below
