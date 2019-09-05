@@ -9,8 +9,8 @@ $app->get('/show_item', function (Request $request, Response $response) {
 
     //GETされた内容を取得します。
     $data = $request->getQueryParams();
-    $data['title']="モックタイトル";
-    $data['description']="説明文説明文";
+    $data['title']="大阪城公園駅から大阪城ホールへの行き方";
+    $data['description']="大阪城公園駅から大阪城ホールへは3分ほどで到着できます。";
     // Render index view
     return $this->view->render($response, '/show_item/index.twig', $data);
 });
