@@ -1,0 +1,68 @@
+{#レイアウトを継承します#}
+{% extends "layout/layout.twig" %}
+
+{#HTMLのタイトルを定義します。#}
+{% block title %}TOP{% endblock %}
+
+{# 適用させたいスタイルシートのパスを指定します #}
+{% block header_scripts_add %}
+    {# 背景動画を表示させるスタイルを読み込みます。#}
+    <link href="/assets/css/video.css" rel="stylesheet">
+{% endblock %}
+
+{#ここから表示したい情報を記載します。#}
+{% block page_content %}
+  <div class="row">
+    <div class="col-sm-12">
+      <h2 class="">matatabiについて</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <p>matatabiは、目的地案内アプリです。</p>
+      <p>このアプリでは、観光で「道に迷ってしまった」を防ぐために作られました。</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <h2 class="">どのように解決するのか</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <p>私たちは、動画と地図での両方のアプローチを考えました。</p>
+      <p>YouTubeとGoogleMapを同期させて、「迷わせない」を実現しました。</p>
+    </div>
+  </div>
+    <style>
+      body {
+        font-family:"Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体";
+        background-image:url("assets/img/ZU19725043.jpg");
+        background-size: cover;
+        background-color:rgba(255,255,255,0.3);
+        background-blend-mode:lighten;
+      }
+
+      h1 {
+        padding-top: 100px;
+        font-size: 90px;
+        color: #005FFF;
+        font-weight: bold;
+      }
+
+      p {
+        font-size: 20px;
+        padding-top: 30px;
+        font-weight: bold;
+      }
+
+      li {
+        list-style: none;
+        padding: 10px;
+      }
+
+    </style>
+{% endblock %}
+
+{#共通フッタとして追記したい情報を記載します。#}
+{% block footer_scripts_add %}{% endblock %}
