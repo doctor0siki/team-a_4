@@ -18,13 +18,22 @@ use Slim\Http\Request;
 
 class Uploader{
 
+    /**
+     * @var Google_Client
+     */
     private $_client;
 
     //リダイレクトURL
     private $_redirectUrl;
 
 
-    public function __construct (string $OAuth2ClientId,string $OAuth2ClinetSecret) {
+    /**
+     * Uploader constructor.
+     * @param string $OAuth2ClientId アプリケーションのクライアントID
+     * @param string $OAuth2ClinetSecret アプリケーションのクライアントシークレット
+     * @param string $AccessToken アクセストークン
+     */
+    public function __construct (string $OAuth2ClientId,string $OAuth2ClinetSecret,string $AccessToken='') {
         //クライアント初期化
         $client = new Google_Client();
 
@@ -40,6 +49,17 @@ class Uploader{
         //リダイレクトURLの設定
         $client->setRedirectUri($redirect);
 
+        $this->_client=$client;
+        $this->_redirectUrl=$redirect;
+
+    }
+
+    /**
+     * @return Google_Client
+     */
+    public function getClient (): Google_Client
+    {
+        return $this->_client;
     }
 
     /**
@@ -58,16 +78,19 @@ class Uploader{
     }
 
 
-    public function initAuthticatin(Request $request){
-
+    public function initAuthentication(Request $request){
         $code=$request->getAttribute ('code');
-
-
     }
 
 
     //参考:https://developers.google.com/youtube/v3/code_samples/php?hl=ja
+
+    /**
+     * @param string $videoPath
+     * @return Google_Service_YouTube_Video
+     */
     public function done(string $videoPath){
+
         // Define an object that will be used to make all API requests.
 
 
@@ -97,14 +120,20 @@ class Uploader{
                 // This example sets the video's title, description, keyword tags, and
                 // video category.
                 $snippet = new Google_Service_YouTube_VideoSnippet();
+
+                //タイトル
                 $snippet->setTitle("Test title");
+                //説明文
                 $snippet->setDescription("Test description");
+                //タグ
                 $snippet->setTags(array("tag1", "tag2"));
 
+                //カテゴリー
                 // Numeric video category. See
                 // https://developers.google.com/youtube/v3/docs/videoCategories/list
                 $snippet->setCategoryId("22");
 
+                //公開・非公開とかそういうやつ
                 // Set the video's status to "public". Valid statuses are "public",
                 // "private" and "unlisted".
                 $status = new Google_Service_YouTube_VideoStatus();
@@ -170,6 +199,8 @@ class Uploader{
 
             $authUrl = $client->createAuthUrl();
         }
+
+         return $insertRequest;
 
     }
 

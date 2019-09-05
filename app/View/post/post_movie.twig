@@ -8,13 +8,16 @@
 {% block header_scripts_add %}
 {% endblock %}
 
+
 {#ここから表示したい情報を記載します。#}
 {% block page_content %}
-<form id="loginForm" method="POST" action="/post_movie/">
+<form id="loginForm" method="POST" enctype="multipart/form-data" action="/post_movie/">
     <div class="form-group">
         <input name="file_upload" type="file" />
     </div>
-    <button type="submit">投稿！</button>
+    <input type="submit" name="投稿">
+
+{#    <button type="submit">投稿！</button>#}
 </form>
 {% endblock %}
 
