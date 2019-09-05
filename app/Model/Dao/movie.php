@@ -13,7 +13,7 @@ namespace Model\Dao;
  * @since 2018/08/28
  * @package Model\Dao
  */
-class User extends Dao
+class Movie extends Dao
 {
 
 
