@@ -19,10 +19,9 @@
             <table class="table table-striped">
                 <thead class="thead-light">
                 <tr>
-                    <th scope="col">写真</th>
-                    <th scope="col">商品名</th>
-                    <th scope="col">特徴</th>
-                    <th scope="col">価格</th>
+                    <th scope="col">サムネイル</th>
+                    <th scope="col">タイトル</th>
+                    <th scope="col">説明文</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -33,15 +32,14 @@
                 {% for row in result %}
                     <tr>
                         <td class="align-middle" scope="col">
-                            <a href="/item/detail/{{ row.id }}">
-                                <img src="{{ row.image_url }}" width="200" class="img-fluid">
+                            <a href="/show_item">
+                                <img src="http://img.youtube.com/vi/{{ row.movie_key}}/default.jpg" width="200" class="img-fluid">
                             </a>
                         </td>
                         <td class="align-middle" scope="col">
-                            <a href="/item/detail/{{ row.id }}">{{ row.name }}</a>
+                            <a href="/item/detail/{{ row.id }}">{{ row.movie_name }}</a>
                         </td>
-                        <td class="align-middle" scope="col">{{ row.spec }}</td>
-                        <td class="align-middle" scope="col">{{ row.price | number_format }}円</td>
+                        <td class="align-middle" scope="col">{{ row.movie_description }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>

@@ -1,6 +1,6 @@
 <?php
 
-use Model\Dao\Item;
+use Model\Dao\Movie;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
@@ -10,10 +10,10 @@ $app->get('/item/list/', function (Request $request, Response $response) {
     $data=[];
 
     //アイテムDAOをインスタンス化します。
-    $item = new Item($this->db);
+    $movie = new Movie($this->db);
 
     //アイテム一覧を取得し、戻り値をresultに格納します
-    $data["result"] = $item->getItemList();
+    $data["result"] = $movie->getItemList();
 
     // Render index view
     return $this->view->render($response, 'item/list.twig', $data);
