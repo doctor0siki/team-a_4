@@ -11,14 +11,65 @@
 
 {#ここから表示したい情報を記載します。#}
 {% block page_content %}
-<form id="loginForm" method="POST" enctype="multipart/form-data" action="/post_movie/">
-    <div class="form-group">
-        <input name="file_upload" type="file" />
+<div class="movie">
+  <div class="detail">
+    <p>目的地までの動画を投稿して、いいねをもらいましょう。</p>
+  </div>
+  <form id="loginForm" method="POST" action="/post_movie/">
+    <p class="text-center">動画タイトル</p>
+ <div class="text-center">
+   <div class="form-group">
+     <input type="text" name="title" value="" placeholder="動画のタイトルを記入してください" size="30">
+   </diV>
+ </div>
+ <p class="text-center">目的地までの説明文</p>
+ <div class="text-center">
+   <div class="form-group">
+     <textarea name="explain" rows="4" cols="40" placeholder="目的地までの説明を記入してください。"></textarea>
+   </div>
+ </div>
+    <div class="text-center" class="movie-file">
+      <input name="file_upload" type="file" />
     </div>
-    <input type="submit" name="投稿">
+    <div class="text-center">
+     <button type="submit" class="btn btn-info btn-block">動画を投稿する</button>
+    </div>
+  </form>
+<style>
+  .detail {
+    font-weight: bold;
+    font-size: 20px;
+  }
+  body {
+    background: #CCFFFF;
+    background-image: url("assets/img/ZU19725043.jpg");
+    background-size: cover;
+    background-color:rgba(255,255,255,0.3);
+    background-blend-mode:lighten;
+    font-family:"Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体";
+  }
+  .movie {
+    border: solid limegreen;
+    background: #CCFFCC;
+    border-radius: 10px;
+    border-width: thick;
+    height: 500px;
+  }
 
-{#    <button type="submit">投稿！</button>#}
-</form>
+  p {
+    font-weight: bold;
+  }
+
+  .btn {
+    height: 40px;
+    width: 200px;
+  }
+
+  .button_wrapper {
+    text-align: center;
+  }
+</style>
+
 {% endblock %}
 
 {#共通フッタとして追記したい情報を記載します。#}
