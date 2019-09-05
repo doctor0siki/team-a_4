@@ -36,6 +36,7 @@ $app->post ('/post_movie/',function (Request $request,Response $response){
 
     $uploader=new YouTube\Uploader('757000144812-fdstur21vbnanni1asphj0827s5l1268.apps.googleusercontent.com','Z2VlTEYdh7TV9aoMBYrSgits');
 
+    //GETリクエストの中にcodeがある場合
     if (0 < strlen ($request->getAttribute ('code'))) {
         if (strval($this->session->get('state')) !== strval($request->getAttribute ('state'))) {
 
@@ -49,14 +50,29 @@ $app->post ('/post_movie/',function (Request $request,Response $response){
         return $response->withRedirect ($uploader->getRedirectUrl ());
     }
 
-    try{
-        $uploader->done ($directory.DIRECTORY_SEPARATOR.$filename);
-    }catch(Google_Service_Exception $e){
-
-    }catch(Google_Exception $e){
-
+    //セッションにtokenがある場合
+    if($this->session->get('token')){
+        $uploader->getClient ()->setAccessToken ($this->session->get('token'));
     }
 
+    //ほぼ初回だけ動くよ
+    if(!$uploader->getClient ()->getAccessToken ()){
+        $state=mt_rand ();
+        $uploader->getClient ()->setState ($state);
+        $this->session->set('state',$state);
+        return $response->withRedirect ($uploader->getClient ()->createAuthUrl ());
+    }
+
+    try{
+        $result=$uploader->done ($directory.DIRECTORY_SEPARATOR.$filename);
+    }catch(Google_Service_Exception $e){
+        dd('サービス側',$e);
+
+    }catch(Google_Exception $e){
+        dd('クライアント側',$e);
+    }
+
+    dd($result);
 
     return $this->view->render($response, 'post/post_movie_done.twig', []);
 });

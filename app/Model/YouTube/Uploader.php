@@ -77,12 +77,6 @@ class Uploader{
         $this->_redirectUrl = $redirectUrl;
     }
 
-
-    public function initAuthentication(Request $request){
-        $code=$request->getAttribute ('code');
-    }
-
-
     //参考:https://developers.google.com/youtube/v3/code_samples/php?hl=ja
 
     /**
@@ -91,29 +85,9 @@ class Uploader{
      */
     public function done(string $videoPath){
 
-        // Define an object that will be used to make all API requests.
-
-
-        if (isset($_GET['code'])) {
-            if (strval($_SESSION['state']) !== strval($_GET['state'])) {
-                die('The session state did not match.');
-            }
-
-            $this->_client->authenticate($_GET['code']);
-            $_SESSION['token'] = $this->_client->getAccessToken();
-            header('Location: ' . $redirect);
-        }
-
-        if (isset($_SESSION['token'])) {
-            $this->_client->setAccessToken($_SESSION['token']);
-        }
-
         $youtube = new Google_Service_YouTube($this->_client);
 // Check to ensure that the access token was successfully acquired.
-        if ($this->_client->getAccessToken()) {
-            try{
-                // REPLACE this value with the path to the file you are uploading.
-                $videoPath = "/path/to/file.mp4";
+
 
                 // Create a snippet with title, description, tags and category ID
                 // Create an asset resource and set its snippet metadata and type.
@@ -181,27 +155,11 @@ class Uploader{
                 // If you want to make other calls after the file upload, set setDefer back to false
                 $this->_client->setDefer(false);
 
-            } catch (Google_Service_Exception $e) {
-                //エラー処理
-                $htmlBody .= sprintf('<p>A service error occurred: <code>%s</code></p>',
-                    htmlspecialchars($e->getMessage()));
-            } catch (Google_Exception $e) {
-                $htmlBody .= sprintf('<p>An client error occurred: <code>%s</code></p>',
-                    htmlspecialchars($e->getMessage()));
-            }
 
-            $_SESSION['token'] = $client->getAccessToken();
-        } else {
-            // If the user hasn't authorized the app, initiate the OAuth flow
-            $state = mt_rand();
-            $client->setState($state);
-            $_SESSION['state'] = $state;
 
-            $authUrl = $client->createAuthUrl();
-        }
+            $_SESSION['token'] = $this->_client->getAccessToken();
 
          return $insertRequest;
-
     }
 
 
