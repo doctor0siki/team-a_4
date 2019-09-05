@@ -1,0 +1,57 @@
+{#レイアウトを継承します#}
+{% extends "layout/layout.twig" %}
+
+{#HTMLのタイトルを定義します。#}
+{% block title %}TOP{% endblock %}
+
+{# 適用させたいスタイルシートのパスを指定します #}
+{% block header_scripts_add %}
+    {# 背景動画を表示させるスタイルを読み込みます。#}
+    <link href="/assets/css/video.css" rel="stylesheet">
+{% endblock %}
+
+{#ここから表示したい情報を記載します。#}
+{% block page_content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="text-center">{{ data.name }}</h1>
+            <p class="text-center">あなたの旅を動画でサポートします。</p>
+        </div>
+    </div>
+
+    <style>
+      body {
+        font-family:"Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体";
+        background-image:url("assets/img/hawaiiGOPR0006.jpg");
+        background-size: cover;
+        background-color:rgba(255,255,255,0.3);
+        background-blend-mode:lighten;
+      }
+
+      h1 {
+        padding-top: 100px;
+        font-size: 90px;
+        color: #005FFF;
+        font-weight: bold;
+      }
+
+      p {
+        font-size: 20px;
+        padding-top: 30px;
+        font-weight: bold;
+      }
+
+      li {
+        list-style: none;
+        padding: 10px;
+      }
+
+      .foo {
+        padding-top: 30px;
+      }
+
+    </style>
+{% endblock %}
+
+{#共通フッタとして追記したい情報を記載します。#}
+{% block footer_scripts_add %}{% endblock %}
