@@ -20,4 +20,3 @@ $app->get('/sample', function (Request $request, Response $response) {
     // Render index view
     return $this->view->render($response, 'sample/index.twig', $data);
 });
-
