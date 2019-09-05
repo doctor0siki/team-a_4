@@ -10,12 +10,31 @@
 
 {#ここから表示したい情報を記載します。#}
 {% block page_content %}
+<div class="detail">
+  <p>目的地までの動画を投稿することで、他の人から評価を受けることができます。</p>
+</div>
 <form id="loginForm" method="POST" action="/post_movie/">
     <div class="form-group">
         <input name="file_upload" type="file" />
     </div>
-    <button type="submit">投稿！</button>
+    <button type="submit" class="btn btn-info btn-block">動画を投稿する</button>
 </form>
+
+<style>
+  .detail {
+    font-weight: bold;
+    font-size: 20px;
+  }
+  body {
+    background: #CCFFFF;
+    background-image: url("assets/img/ZU19725043.jpg");
+    background-size: cover;
+    background-color:rgba(255,255,255,0.3);
+    background-blend-mode:lighten;
+    font-family:"Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体";
+  }
+</style>
+
 {% endblock %}
 
 {#共通フッタとして追記したい情報を記載します。#}
