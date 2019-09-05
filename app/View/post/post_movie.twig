@@ -1,0 +1,22 @@
+{#レイアウトを継承します#}
+{% extends "layout/layout.twig" %}
+
+{#HTMLのタイトルを定義します。#}
+{% block title %}動画投稿{% endblock %}
+
+{# 適用させたいスタイルシートのパスを指定します #}
+{% block header_scripts_add %}
+{% endblock %}
+
+{#ここから表示したい情報を記載します。#}
+{% block page_content %}
+<form id="loginForm" method="POST" action="/post_movie/">
+    <div class="form-group">
+        <input name="file_upload" type="file" />
+    </div>
+    <button type="submit">投稿！</button>
+</form>
+{% endblock %}
+
+{#共通フッタとして追記したい情報を記載します。#}
+{% block footer_scripts_add %}{% endblock %}
