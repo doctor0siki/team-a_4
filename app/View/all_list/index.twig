@@ -19,6 +19,7 @@
             <table class="table table-striped">
                 <thead class="thead-light">
                 <tr>
+                    <th scope="col">ユーザー名</th>
                     <th scope="col">サムネイル</th>
                     <th scope="col">タイトル</th>
                     <th scope="col">説明文</th>
@@ -31,6 +32,9 @@
                 {# ループ処理中の1行はrowの中に入りますので、このループ中はrow.カラム名で情報を表示することが可能です #}
                 {% for row in result %}
                     <tr>
+                        <td class="align-middle" scope="col">
+                          <a href="/detail/{{row.movie_id}}"></a>
+                        </td>
                         <td class="align-middle" scope="col">
                             <a href="/detail/{{row.movie_id}}">
                                 <img src="http://img.youtube.com/vi/{{ row.movie_key}}/default.jpg" width="200" class="img-fluid">
