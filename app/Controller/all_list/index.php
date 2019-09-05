@@ -16,6 +16,6 @@ $app->get('/all_list/', function (Request $request, Response $response) {
     $data["result"] = $movie->getItemList();
 
     // Render index view
-    return $this->view->render($response, 'item/list.twig', $data);
+    return $this->view->render($response, 'all_list/index.twig', $data);
 
 });

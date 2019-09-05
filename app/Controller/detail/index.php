@@ -1,6 +1,6 @@
 <?php
 
-use Model\Dao\Item;
+use Model\Dao\Movie;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
@@ -14,21 +14,24 @@ use Slim\Http\Response;
  * {item_id}の中身は$argsに入ります。
  * 取得する時は、$args["item_id"]で取得できます。
  */
-$app->get('/item/detail/{item_id}', function (Request $request, Response $response, $args) {
-
+$app->get('/detail/{movie_id}', function (Request $request, Response $response, $args) {
 
     $data = [];
 
     //URLパラメータのitem_idを取得します。
-    $item_id = $args["item_id"];
+    $movie_id = $args["movie_id"];
 
     //アイテムDAOをインスタンス化します。
-    $item = new Item($this->db);
+    $movieDB = new Movie($this->db);
 
     //URLパラメータのitem_id部分を引数として渡し、戻り値をresultに格納します
-    $data["result"] = $item->getItem($item_id);
+    $movie = $movieDB->getItem($movie_id);
 
+    $data['title']=$movie['movie_name'];
+    $data['description']=$movie["movie_description"];
+    $data['movie_key'] = $movie["movie_key"];
+    $data['map_url'] = $movie["map_url"];
     // Render index view
-    return $this->view->render($response, 'item/detail.twig', $data);
+    return $this->view->render($response, '/detail/index.twig', $data);
 
 });

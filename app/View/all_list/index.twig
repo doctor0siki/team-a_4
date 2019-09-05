@@ -2,7 +2,7 @@
 {% extends "layout/layout.twig" %}
 
 {#HTMLのタイトルを定義します。#}
-{% block title %}商品一覧{% endblock %}
+{% block title %}動画一覧{% endblock %}
 
 {# このページに適用させたいスタイルシートを指定します #}
 {% block header_scripts_add %}
@@ -11,7 +11,7 @@
 {#ここから表示したい情報を記載します。#}
 {% block page_content %}
     <div class="page-header text-center">
-        <h1>商品一覧</h1>
+        <h1>動画一覧</h1>
     </div>
     <div class="row">
         <!-- Boostrapのテーブルタグについては、https://cccabinet.jpn.org/bootstrap4/content/tables 参照 -->
@@ -32,12 +32,12 @@
                 {% for row in result %}
                     <tr>
                         <td class="align-middle" scope="col">
-                            <a href="/show_item">
+                            <a href="/detail/{{row.movie_id}}">
                                 <img src="http://img.youtube.com/vi/{{ row.movie_key}}/default.jpg" width="200" class="img-fluid">
                             </a>
                         </td>
                         <td class="align-middle" scope="col">
-                            <a href="/show_item">{{ row.movie_name }}</a>
+                            <a href="/detail/{{row.movie_id}}">{{ row.movie_name }}</a>
                             {#
                             <a href="/item/detail/{{ row.id }}">{{ row.movie_name }}</a>
                             #}
