@@ -24,7 +24,7 @@ $app->post('/login/', function (Request $request, Response $response) {
     //ユーザーDAOをインスタンス化
     $user = new User($this->db);
 
-    $param["email"] = $data["email"];
+    $param["user_id"] = $data["user_id"];
     $param["password"] = $data["password"];
 
     //入力された情報から会員情報を取得
