@@ -44,3 +44,14 @@ $container['db'] = function ($c) {
 $container['session'] = function ($c) {
     return new \SlimSession\Helper;
 };
+
+//// monolog
+//$container['google_api_client'] = function ($c) {
+//    $settings = $c->get('settings')['logger'];
+//    $client = new Google_Client();
+//
+//    $logger = new Monolog\Logger($settings['name']);
+//    $logger->pushProcessor(new Monolog\Processor\UidProcessor());
+//    $logger->pushHandler(new Monolog\Handler\StreamHandler($settings['path'], $settings['level']));
+//    return $logger;
+//};
