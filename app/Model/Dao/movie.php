@@ -71,5 +71,21 @@ class Movie extends Dao
         return $statement->fetch();
 
     }
+    public function getItemListOfUser($user_id)
+    {
+        //全件取得するクエリを作成
+        $sql = "select * from movie where movie_user_id =:id";
 
+        // SQLをプリペア
+        $statement = $this->db->prepare($sql);
+
+        //idを指定します
+        $statement->bindParam(":id", $user_id, PDO::PARAM_INT);
+
+        //SQLを実行
+        $statement->execute();
+
+        //結果レコードを一件取得し、返送
+        return $statement->fetchAll();
+    }
 }

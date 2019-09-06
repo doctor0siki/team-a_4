@@ -14,41 +14,52 @@
 {% block page_content %}
     <div class="row">
         <div class="col-sm-12">
-            <h1 class="text-center">{{ data.name }}</h1>
-            <p class="text-center">あなたの旅を動画でサポートします。</p>
+
+          <h3 class="text-center">マイページ</h3>
+            おなまえ : <h4 class="text-center">{{ name }}</h4>
+            メールアドレス : <p class="text-center">{{ email }}</p>
         </div>
     </div>
-
+    <div class="page-header text-center">
+        <h2>動画一覧</h2>
+    </div>
+    <div class="row">
+        <!-- Boostrapのテーブルタグについては、https://cccabinet.jpn.org/bootstrap4/content/tables 参照 -->
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">サムネイル</th>
+                    <th scope="col">タイトル</th>
+                    <th scope="col">説明文</th>
+                </tr>
+                </thead>
+                <tbody>
+                {# 取得した結果分ループする処理です#}
+                {# コントローラで指定した $data["result"] は Twigでは result として扱えます #}
+                {# for文でresultの中の一次元目の配列をループで回す形となります #}
+                {# ループ処理中の1行はrowの中に入りますので、このループ中はrow.カラム名で情報を表示することが可能です #}
+                {% for row in result %}
+                    <tr>
+                        <td class="align-middle" scope="col">
+                            <a href="/detail/{{row.movie_id}}">
+                                <img src="http://img.youtube.com/vi/{{ row.movie_key}}/default.jpg" width="200" class="img-fluid">
+                            </a>
+                        </td>
+                        <td class="align-middle" scope="col">
+                            <a href="/detail/{{row.movie_id}}">{{ row.movie_name }}</a>
+                            {#
+                            <a href="/item/detail/{{ row.id }}">{{ row.movie_name }}</a>
+                            #}
+                        </td>
+                        <td class="align-middle" scope="col">{{ row.movie_description }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
     <style>
-      body {
-        font-family:"Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体";
-        background-image:url("assets/img/hawaiiGOPR0006.jpg");
-        background-size: cover;
-        background-color:rgba(255,255,255,0.3);
-        background-blend-mode:lighten;
-      }
-
-      h1 {
-        padding-top: 100px;
-        font-size: 90px;
-        color: #005FFF;
-        font-weight: bold;
-      }
-
-      p {
-        font-size: 20px;
-        padding-top: 30px;
-        font-weight: bold;
-      }
-
-      li {
-        list-style: none;
-        padding: 10px;
-      }
-
-      .foo {
-        padding-top: 30px;
-      }
 
     </style>
 {% endblock %}
