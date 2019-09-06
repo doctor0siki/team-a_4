@@ -105,7 +105,5 @@ class Movie extends Dao
 
       //結果レコードを一件取得し、返送
       return $statement->fetchAll();
-
-
     }
 }

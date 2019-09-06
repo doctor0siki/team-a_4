@@ -29,7 +29,7 @@ $app->get('/detail/{movie_id}', function (Request $request, Response $response, 
 
     $data['title']=$movie['movie_name'];
     $data['description']=$movie["movie_description"];
-    $data['movie_key'] = $movie["movie_key"];
+    $data['movie_path'] = $movie["movie_path"];
     $data['map_url'] = $movie["map_url"];
     // Render index view
     return $this->view->render($response, '/detail/index.twig', $data);
