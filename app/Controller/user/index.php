@@ -10,6 +10,6 @@ $app->get('/user/', function (Request $request, Response $response) {
     // $dd(user_info); 正常に取れています。
     //GETされた内容を取得します。
     $data = $this->session["user_info"];
-    // Render index view
+    dd($data);
     return $this->view->render($response, '/user/user.twig', $data);
 });
