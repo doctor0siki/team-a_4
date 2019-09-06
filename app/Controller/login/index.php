@@ -36,14 +36,14 @@ $app->post('/login/', function (Request $request, Response $response) {
         //セッションにユーザー情報を登録
         $this->session->set('user_info', $result);
 
-        //TOPへリダイレクト
-        return $response->withRedirect('/');
+        //一覧ページへリダイレクト
+        return $response->withRedirect('/all_list/');
 
     } else {
         //入力項目がマッチしない場合エラーを出す
         $data["error"] = "ユーザー名かパスワードが間違っています";
     }
-
+    //ここに到達するのはログインできなかったとき
     // Render index view
     return $this->view->render($response, 'login/login.twig', $data);
 
