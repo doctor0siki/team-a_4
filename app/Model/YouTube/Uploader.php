@@ -51,9 +51,7 @@ class Uploader{
 
         $this->_client=$client;
         $this->_redirectUrl=$redirect;
-
     }
-
     /**
      * @return Google_Client
      */
@@ -83,12 +81,11 @@ class Uploader{
      * @param string $videoPath
      * @return Google_Service_YouTube_Video
      */
-    public function done(string $videoPath){
+    public function done(string $videoPath,string $title,string $description){
+        dd($title,$description);
 
         $youtube = new Google_Service_YouTube($this->_client);
 // Check to ensure that the access token was successfully acquired.
-
-
                 // Create a snippet with title, description, tags and category ID
                 // Create an asset resource and set its snippet metadata and type.
                 // This example sets the video's title, description, keyword tags, and
@@ -149,13 +146,9 @@ class Uploader{
                     $chunk = fread($handle, $chunkSizeBytes);
                     $status = $media->nextChunk($chunk);
                 }
-
                 fclose($handle);
-
                 // If you want to make other calls after the file upload, set setDefer back to false
                 $this->_client->setDefer(false);
-
-
 
             $_SESSION['token'] = $this->_client->getAccessToken();
 
