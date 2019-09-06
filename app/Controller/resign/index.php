@@ -19,8 +19,15 @@ $app->get('/resign/', function (Request $request, Response $response) {
 // 会員登録処理コントローラ
 $app->post('/resign/', function (Request $request, Response $response) {
 
+  $data = $this->session["user_info"];
+
+  if (!$data ) {
+    return $response->withRedirect('/login/');
+  }
+
     //POSTされた内容を取得します
     $data = $request->getParsedBody();
+
 
     //ユーザーDAOをインスタンス化
     $user = new User($this->db);
@@ -33,5 +40,7 @@ $app->post('/resign/', function (Request $request, Response $response) {
 
     // 登録完了ページを表示します。
     return $this->view->render($response, 'resign/resign_done.twig', $data);
+
+
 
 });
