@@ -88,4 +88,24 @@ class Movie extends Dao
         //結果レコードを一件取得し、返送
         return $statement->fetchAll();
     }
+
+    public function search (string $keyword) {
+      $sql = "select * from movie where movie_name like :keyword";
+
+      // SQLをプリペア
+      $statement = $this->db->prepare($sql);
+
+      //idを指定します
+
+      $like_keyword = "%$keyword%";
+      $statement->bindParam(":keyword", $like_keyword, PDO::PARAM_STR);
+
+      //SQLを実行
+      $statement->execute();
+
+      //結果レコードを一件取得し、返送
+      return $statement->fetchAll();
+
+
+    }
 }
