@@ -11,6 +11,9 @@
 
 {#ここから表示したい情報を記載します。#}
 {% block page_content %}
+
+<div class="row">
+
     <div class="movie">
         <div class="detail">
             <p>目的地までの動画を投稿して、いいねをもらいましょう。</p>
@@ -51,7 +54,6 @@
                 background-size: cover;
                 background-color: rgba(255, 255, 255, 0.3);
                 background-blend-mode: lighten;
-                font-family: "Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体";
             }
             .movie {
                 border: solid limegreen;
@@ -61,22 +63,15 @@
                 height: 500px;
             }
 
-            p {
-                font-weight: bold;
-            }
+  .btn-success {
+    margin: 35px;
 
-            .btn {
-                height: 40px;
-                width: 200px;
-            }
+  }
 
-            .button_wrapper {
-                text-align: center;
-            }
-        </style>
+</style>
+
 
     {% endblock %}
 
     {#共通フッタとして追記したい情報を記載します。#}
     {% block footer_scripts_add %}{% endblock %}
-

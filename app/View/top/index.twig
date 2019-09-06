@@ -12,13 +12,13 @@
 
 {#ここから表示したい情報を記載します。#}
 {% block page_content %}
-    <div class="row">
+    <div class="row title">
         <div class="col-sm-12">
             <h1 class="text-center">matatabi</h1>
             <p class="text-center">あなたの旅を動画でサポートします。</p>
         </div>
     </div>
-    <div class="row foo">
+    <div class="row columns">
         {% if session.user_info  =="" %}
             <li class="col-sm-12 col-lg-6">
               <a class="btn btn-success btn-lg btn-block" href="/register/">会員登録</a>
@@ -31,7 +31,6 @@
     </div>
     <style>
       body {
-        font-family:"Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体";
         background-image:url("assets/img/hawaiiGOPR0006.jpg");
         background-size: cover;
         background-color:rgba(255,255,255,0.3);
@@ -39,25 +38,26 @@
       }
 
       h1 {
-        padding-top: 100px;
-        font-size: 90px;
-        color: #005FFF;
+        padding-top: 10rem;
+        font-size: 9rem;
+        color: #ff6747;
         font-weight: bold;
+        font-family: 'Fredoka One', cursive;
       }
 
       p {
-        font-size: 20px;
-        padding-top: 30px;
+        font-size: 2rem;
+        padding-top: 5rem;
         font-weight: bold;
       }
 
       li {
         list-style: none;
-        padding: 10px;
+        padding: .75rem;
       }
 
-      .foo {
-        padding-top: 30px;
+      .columns {
+        padding-top: 5rem;
       }
 
     </style>
