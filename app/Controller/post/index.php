@@ -3,13 +3,20 @@
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Http\UploadedFile;
+
 use Model\YouTube;
+use Model\Dao\Movie;
 
 $app->get('/post_movie/',function (Request $request,Response $response){
     return $this->view->render($response, 'post/post_movie.twig', []);
 });
 
 $app->post ('/post_movie/',function (Request $request,Response $response){
+    $session_user = $this->session["user_info"];
+
+    if (!$session_user ) {
+      return $response->withRedirect('/login/');
+    }
     //フォームからアップロードされたものを
     $uploadedFiles = $request->getUploadedFiles();
 
@@ -19,15 +26,31 @@ $app->post ('/post_movie/',function (Request $request,Response $response){
         //return $this->view->render();
     }
     //アップロード先 TODO:いつかリファクタリング
-    $directory=realpath(__DIR__.'/../../../uploads');
+    $directory=realpath(__DIR__.'/../../../public/uploads');
 
     //アップロード先に移動させる
     if ($uploadedFile->getError() !== UPLOAD_ERR_OK) {
         //TODO:エラー処理
     }
-
+    //データをローカルに保存
     $filename = moveUploadedFile($directory, $uploadedFile);
 
+    //ファイル名と詳細説明をリクエストから取得します
+    $data=$request->getParsedBody();
+    $title = $data['title'];
+    $description = $data['description'];
+    $map_url = $data['map_url'];
+
+    $insert_params['movie_user_id']= $session_user['id'];
+    $insert_params['movie_name']= $title;
+    $insert_params['movie_description']=$description;
+    $insert_params['movie_path']=$filename;
+    $insert_params['map_url']=$map_url;
+
+    $movie = new Movie($this->db);
+    $movie->insert($insert_params);
+
+/*
     $uploader=new YouTube\Uploader('757000144812-fdstur21vbnanni1asphj0827s5l1268.apps.googleusercontent.com','Z2VlTEYdh7TV9aoMBYrSgits');
     //GETリクエストの中にcodeがある場合
     if (0 < strlen ($request->getAttribute ('code'))) {
@@ -56,10 +79,6 @@ $app->post ('/post_movie/',function (Request $request,Response $response){
         return $response->withRedirect ($uploader->getClient ()->createAuthUrl ());
     }
 
-    //ファイル名と詳細説明をリクエストから取得します
-    $data=$request->getParsedBody();
-    $title = $data['title'];
-    $description = $data['description'];
     try{
         $result=$uploader->done ($directory.DIRECTORY_SEPARATOR.$filename,$title,$description);
     }catch(Google_Service_Exception $e){
@@ -70,7 +89,7 @@ $app->post ('/post_movie/',function (Request $request,Response $response){
     }
 
     dd($result);
-
+*/
     return $this->view->render($response, 'post/post_movie_done.twig', []);
 });
 
